@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResQLink Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-nav">
+          <a class="brand" href="#">ResQLink</a>
+          <nav class="nav-links">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#tasks">Task</a>
+            <a href="#volunteers">Volunteers</a>
+          </nav>
+        </div>
+        <div class="admin-pill">Coordinator Admin</div>
+      </header>
+
+      <main class="page-content">
+        <section id="dashboard" class="hero-panel">
+          <div>
+            <p class="eyebrow">Disaster Relief Task Coordination Portal</p>
+            <h1>Volunteer-driven relief operations during emergencies.</h1>
+            <p class="hero-copy">
+              Coordinate urgent field work, assign available volunteers, and
+              track progress from one responsive command center.
+            </p>
+          </div>
+          <button id="openTaskModalBtn" class="primary-btn">+ New Task</button>
+        </section>
+
+        <section class="stats-grid">
+          <article class="stat-card">
+            <span>Active Tasks</span>
+            <strong id="activeTasksCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Critical Tasks</span>
+            <strong id="criticalTasksCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Volunteers</span>
+            <strong id="volunteerCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Completed Today</span>
+            <strong id="completedTodayCount">0</strong>
+          </article>
+        </section>
+
+        <section class="workspace-grid">
+          <section id="tasks" class="tasks-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-label">Tasks</p>
+                <h2>Relief task board</h2>
+              </div>
+              <button id="openTaskModalBtnSecondary" class="secondary-btn">
+                Create Task
+              </button>
+            </div>
+
+            <div class="filter-toolbar">
+              <div id="statusTabs" class="tab-group">
+                <button class="tab active" data-status="all">All</button>
+                <button class="tab" data-status="active">Active</button>
+                <button class="tab" data-status="pending">Pending</button>
+                <button class="tab" data-status="completed">Completed</button>
+              </div>
+
+              <div id="priorityTabs" class="chip-group">
+                <button class="chip active" data-priority="all">ALL</button>
+                <button class="chip" data-priority="critical">CRITICAL</button>
+                <button class="chip" data-priority="high">HIGH</button>
+                <button class="chip" data-priority="medium">MEDIUM</button>
+              </div>
+            </div>
+
+            <div id="taskGrid" class="task-grid"></div>
+          </section>
+
+          <aside id="volunteers" class="sidebar-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-label">Available Volunteers</p>
+                <h2>Ready for deployment</h2>
+              </div>
+              <button id="openVolunteerModalBtn" class="secondary-btn">
+                Register Volunteer
+              </button>
+            </div>
+
+            <div id="availableVolunteerList" class="volunteer-list"></div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div id="taskModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Create Relief Task</h3>
+          <button class="close-btn" data-close="taskModal">&times;</button>
+        </div>
+        <form id="taskForm" class="modal-form">
+          <input name="title" type="text" placeholder="Task title" required />
+          <textarea
+            name="description"
+            rows="4"
+            placeholder="Task description"
+            required
+          ></textarea>
+          <div class="form-row">
+            <select name="priority" required>
+              <option value="">Priority</option>
+              <option value="critical">Critical</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+            </select>
+            <select name="status" required>
+              <option value="pending">Pending</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <input
+            name="minVolunteers"
+            type="number"
+            min="1"
+            placeholder="Minimum volunteers"
+            required
+          />
+          <input
+            name="requiredSkills"
+            type="text"
+            placeholder="Required skills (comma separated)"
+            required
+          />
+          <button type="submit" class="primary-btn">Add Task</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="volunteerModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Register Volunteer</h3>
+          <button class="close-btn" data-close="volunteerModal">&times;</button>
+        </div>
+        <form id="volunteerForm" class="modal-form">
+          <input name="name" type="text" placeholder="Full name" required />
+          <input name="email" type="email" placeholder="Email address" required />
+          <input
+            name="skills"
+            type="text"
+            placeholder="Skills (comma separated)"
+            required
+          />
+          <select name="availability" required>
+            <option value="available">Available</option>
+            <option value="on_task">On Task</option>
+          </select>
+          <button type="submit" class="primary-btn">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
